@@ -1,0 +1,6 @@
+URIPARM1 [A-Za-z0-9$.+!*'|(){},~@#%&/=:;_?\-\[\]]*
+URIPATH1 (?:/[A-Za-z0-9$.+!*'(){},~:;=@#%&_\- ]*)+
+URI1 (%{URIPROTO}://)?(?:%{USER}(?::[^@]*)?@)?(?:%{URIHOST})?(?:%{URIPATHPARAM})?
+NGINXACCESS %{HOSTNAME:http_host} %{IPORHOST:clientip} (?:-|(%{WORD}.%{WORD})) (%{USER:ident}|- -) \[%{HTTPDATE:timestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent}
+NODEAPPLOG \[%{TIMESTAMP_ISO8601:timestamp}\]\ \[%{WORD:loglevel}\]\ \[%{WORD:logfile}\]\ -\ %{GREEDYDATA:info}
+NODEACCESSLOG \[%{GREEDYDATA:timestamp}\]\ \[%{WORD:loglevel}\]\ %{WORD:logtype}\ -\ %{IPORHOST:clientip}\ (%{USER:ident}|-) (%{USER:auth}|-) "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent}
