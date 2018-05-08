@@ -6,8 +6,8 @@ services:
     build: elasticsearch/
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /mnt/elasticsearch/data:/usr/share/elasticsearch/data
-      - /mnt/elasticsearch/logs:/usr/share/elasticsearch/logs
+      - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
+      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
     ports:
       - "9200:9200"
       - "9300:9300"
