@@ -42,16 +42,6 @@ services:
       - elk
     depends_on:
       - elasticsearch
-
-  filebeat:
-    image: prima/filebeat
-    hostname: filebeat
-    container_name: filebeat
-    restart: always
-    volumes:
-      - ./filebeat/config/filebeat.yml:/filebeat.yml
-      - ./filebeat/upload:/data/logs
-      - ./filebeat/registry:/etc/registry
   redis:
     image: redis:latest
     ports:
