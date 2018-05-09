@@ -2,7 +2,7 @@
 ## Default Elasticsearch configuration from elasticsearch-docker.
 ## from https://github.com/elastic/elasticsearch-docker/blob/master/build/elasticsearch/elasticsearch.yml
 #
-cluster.name: "docker-cluster"
+cluster.name: "docker-clusters"
 # node.name: "node-data-1"
 # node.master: true
 # node.data: false
