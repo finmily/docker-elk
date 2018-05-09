@@ -2,7 +2,7 @@ version: '2'
 
 services:
 
-  elasticsearch:
+  elasticsearch_master:
     build:
       context: elasticsearch/
     volumes:
