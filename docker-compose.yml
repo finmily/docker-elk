@@ -24,7 +24,7 @@ services:
       - ./elasticsearch_slaver1/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
       - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
-    link:
+    links:
       - elasticsearch_master
     environment:
       ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
@@ -37,7 +37,7 @@ services:
       - ./elasticsearch_slaver2/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
       - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
-    link:
+    links:
       - elasticsearch_master
     environment:
       ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
