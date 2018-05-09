@@ -22,8 +22,8 @@ services:
       context: elasticsearch_slaver1/
     volumes:
       - ./elasticsearch_slaver1/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
-      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
+      - /mnt/elasticsearch2/data:/usr/share/elasticsearch_slaver1/data
+      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch_slaver1/logs
     links:
       - elasticsearch
     environment:
@@ -35,8 +35,8 @@ services:
       context: elasticsearch_slaver2/
     volumes:
       - ./elasticsearch_slaver2/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
-      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
+      - /mnt/elasticsearch2/data:/usr/share/elasticsearch_slaver1/data
+      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch_slaver2/logs
     links:
       - elasticsearch
     environment:
