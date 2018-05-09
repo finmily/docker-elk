@@ -3,13 +3,13 @@
 ## from https://github.com/elastic/elasticsearch-docker/blob/master/build/elasticsearch/elasticsearch.yml
 #
 cluster.name: "docker-cluster"
-node.name: "node-master"
-node.master: true
-node.data: false
+# node.name: "node-data-1"
+# node.master: true
+# node.data: false
 # http.port: 9200
 # network.host: 0.0.0.0
-
-
+# network.publish_host: master-ip
+discovery.zen.ping.unicast.hosts: ["elasticsearch_master"]
 
 # minimum_master_nodes need to be explicitly set when bound on a public IP
 # set to 1 to allow single node clusters

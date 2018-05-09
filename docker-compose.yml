@@ -17,6 +17,33 @@ services:
     networks:
       - elk
 
+  elasticsearch_slaver1:
+    build:
+      context: elasticsearch_slaver1/
+    volumes:
+      - ./elasticsearch_slaver1/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
+      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
+    link:
+      - elasticsearch_master
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    networks:
+      - elk
+  elasticsearch_slaver2:
+    build:
+      context: elasticsearch_slaver2/
+    volumes:
+      - ./elasticsearch_slaver2/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
+      - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
+    link:
+      - elasticsearch_master
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    networks:
+      - elk
+
   logstash:
     build:
       context: logstash/
