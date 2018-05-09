@@ -4,7 +4,7 @@ services:
 
   elasticsearch_master:
     build:
-      context: elasticsearch/
+      context: elasticsearch_master/
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
@@ -59,7 +59,7 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      - elasticsearch_master
 
   kibana:
     build:
@@ -71,7 +71,7 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      - elasticsearch_master
   redis:
     image: redis:latest
     ports:
