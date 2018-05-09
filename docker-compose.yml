@@ -2,9 +2,9 @@ version: '2'
 
 services:
 
-  elasticsearch_master:
+  elasticsearch:
     build:
-      context: elasticsearch_master/
+      context: elasticsearch/
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
@@ -25,7 +25,7 @@ services:
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
       - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
     links:
-      - elasticsearch_master
+      - elasticsearch
     environment:
       ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
     networks:
@@ -38,7 +38,7 @@ services:
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
       - /mnt/elasticsearch2/logs:/usr/share/elasticsearch/logs
     links:
-      - elasticsearch_master
+      - elasticsearch
     environment:
       ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
     networks:
@@ -59,7 +59,7 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch_master
+      - elasticsearch
 
   kibana:
     build:
@@ -71,7 +71,7 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch_master
+      - elasticsearch
   redis:
     image: redis:latest
     ports:
