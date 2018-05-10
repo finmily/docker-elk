@@ -5,6 +5,7 @@ services:
   elasticsearch:
     build:
       context: elasticsearch/
+    container_name: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch/data
@@ -13,7 +14,9 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
     networks:
       - elk
 
@@ -21,26 +24,38 @@ services:
     build:
       context: elasticsearch_slaver1/
     volumes:
-      - ./elasticsearch_slaver1/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch_slaver1/data
       - /mnt/elasticsearch2/logs:/usr/share/elasticsearch_slaver1/logs
     links:
       - elasticsearch
     environment:
-      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     networks:
       - elk
   elasticsearch_slaver2:
     build:
       context: elasticsearch_slaver2/
     volumes:
-      - ./elasticsearch_slaver2/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /mnt/elasticsearch2/data:/usr/share/elasticsearch_slaver1/data
       - /mnt/elasticsearch2/logs:/usr/share/elasticsearch_slaver2/logs
     links:
       - elasticsearch
     environment:
-      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     networks:
       - elk
 
