@@ -6,8 +6,8 @@ cluster.name: "docker-clusters"
 node.name: "node-master"
 node.master: true
 node.data: false
-# http.port: 9200
-# network.host: 0.0.0.0
+http.port: 9200
+network.host: 0.0.0.0
 
 
 
